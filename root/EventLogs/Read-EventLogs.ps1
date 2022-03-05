@@ -13,21 +13,21 @@ function Read-EventLogs {
     begin {
         
         $eventLogReader = New-Object -TypeName "System.Diagnostics.EventLog"($EventLogName)
-        $returnedEventLogs = [System.Collections.ArrayList]@()
 
         $eventCount = $eventLogReader.Entries.Count
+        $returnedEventLogs = New-Object System.Collections.Generic.List[string]
 
     }
     process {
         switch ($LimitReturnAmountTo) {
             0 {  
                 for ($i = $eventCount; $i -ge 0; $i--) {
-                    $returnedEventLogs.Add($eventLogReader.Entries[$i]) | Out-Null
+                    $returnedEventLogs.Add($eventLogReader.Entries[$i])
                 }
             }
             Default {
                 for ($i = ($eventCount - $LimitReturnAmountTo); $i -lt $eventCount; $i++) {
-                    $returnedEventLogs.Add($eventLogReader.Entries[$i]) | Out-Null
+                    $returnedEventLogs.Add($eventLogReader.Entries[$i])
                 }
             }
         }
@@ -67,6 +67,6 @@ function Read-EventLogs {
 # xkpFaQyb3x4C2EVX8WGWbqKImVhbzYXpOtZjvpquo6Q2zNdiaKjHN9Jo8URf+Bvd
 # 6FN7PRO6HCf8pDS2Q46umzAq+dJ3lFoWRv+HgUKSiepcuoB1wZwsumMi1RjEHKCu
 # XqFOyXcVIydbe0AFGroOU+mcCJl5wukYL6bFRf6eGrUDWEnqqLEL8iWq1+wWfWA9
-# eaa+r1lHW/mZ1WV39FyyYpppSdI9cs57hks+/gdFaDZgwpSOxYKu0uPAN3YoQ+iA
+# eaa+r1lHW/mZ1WV39FyyYpppSdI9cs57hks+/gdFaDZgwpSOxYKuPAN3YoQ+iA
 # lB7EuafWpXxWM6dxdlHcnZIfDiIANPd3sQ==
 # SIG # End signature block
