@@ -2,14 +2,15 @@ function Write-LogMessage {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)]
-        [string]$LogPath,
+        [string]$LogFile,
         [Parameter(Mandatory=$true)]
         [string]$LogMessage
     )
     $DateTime = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
-    if (! (Test-Path $LogPath) ) {
-        New-Item -Path $LogPath -ItemType File -Force
+    if (! (Test-Path $LogFile) ) {
+        New-Item -Path $LogFile -ItemType File -Force
     }
     $LogMessage = "$DateTime | $LogMessage"
-    Add-Content -Path $LogPath -Value $LogMessage
+    Add-Content -Path $LogFile -Value $LogMessage
+    Write-Output $LogMessage
 }
